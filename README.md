@@ -41,20 +41,6 @@ Unlike traditional property listing systems, **Proplytics** transforms raw real 
 
 # 🏗️ System Architecture
 
-```text
-Data Sources
-     ↓
-ETL Process (SSIS)
-     ↓
-SQL Server Data Warehouse
-     ↓
-SSRS Reports & Power BI Dashboards
-     ↓
-Business Insights & Decision Support
-```
-
-# 🏗️ System Architecture
-
 End-to-end Power BI project pipeline — from data modeling to user-facing interface.
 
 ```mermaid
