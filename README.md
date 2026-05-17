@@ -53,7 +53,7 @@ SSRS Reports & Power BI Dashboards
 Business Insights & Decision Support
 ```
 
-# Project Architecture
+# 🏗️ System Architecture
 
 End-to-end Power BI project pipeline — from data modeling to user-facing interface.
 
@@ -62,12 +62,12 @@ flowchart TD
     A["🗂️ 1 · ERD & Mapping\nEntity relationships · source-to-target mapping"]
     B["🛢️ 2 · Database Creation\nTables · keys · indexes · schemas"]
     C["⚙️ 3 · Stored Procedures\nBusiness logic · transformations · automation"]
-    D["🏛️ 4 · Data Warehouse DWH\nStar schema · fact & dimension tables"]
+    D["🏛️ 4 · Data Warehouse DWH\nGalaxy schema · fact & dimension tables"]
     E["🔄 5 · SSIS Integration ETL\nExtract · transform · load into DWH"]
     F["📋 6 · SSRS Reports\nScheduled · paginated · export-ready"]
     G["📊 7a · Power BI Dashboards\nInteractive visuals · KPIs · drill-through"]
-    H["🤖 7b · AI Automation\nForecasting · anomaly detection · NLP insights"]
-    I["🌐 8 · Website Interface\nEmbedded reports · end-user portal"]
+    H["🤖 7b · AI Automation\nAssign New Users To The System"]
+    I["🌐 8 · Website Interface\nLog In · Power BI Dashboards"]
 
     A --> B
     B --> C
@@ -89,22 +89,6 @@ flowchart TD
     style H fill:#FAECE7,stroke:#993C1D,color:#712B13
     style I fill:#FBEAF0,stroke:#993556,color:#72243E
 ```
-
-## Layer Overview
-
-| Layer | Component | Purpose |
-|-------|-----------|---------|
-| Data Modeling | ERD & Mapping | Define entity relationships and source-to-target field mapping |
-| Database | Database Creation | Build tables, primary/foreign keys, indexes, and schemas |
-| Database | Stored Procedures | Encapsulate business logic, transformations, and scheduled automation |
-| DWH & ETL | Data Warehouse | Star schema design with fact and dimension tables |
-| DWH & ETL | SSIS Integration | ETL pipeline to extract, transform, and load data into the DWH |
-| Reporting | SSRS Reports | Paginated, pixel-perfect reports scheduled for export |
-| Visualization | Power BI Dashboards | Interactive dashboards with KPIs, slicers, and drill-through |
-| AI | AI Automation | Forecasting, anomaly detection, and NLP-powered insights |
-| Presentation | Website Interface | Embedded reports and end-user portal for data consumers |
-
-
 ---
 
 # 📊 Key Features
