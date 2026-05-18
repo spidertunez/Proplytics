@@ -47,7 +47,7 @@ flowchart TD
     A["🗂️ 1 · ERD & Mapping\nEntity relationships · source-to-target mapping"]
     B["🛢️ 2 · Database Creation\nTables · keys · indexes · schemas"]
     C["⚙️ 3 · Stored Procedures\nBusiness logic · transformations · automation"]
-    D["🏛️ 4 · Data Warehouse DWH\nGalaxy schema · fact & dimension tables"]
+    D["🏛️ 4 · Data Warehouse\nGalaxy schema · fact & dimension tables"]
     E["🔄 5 · SSIS Integration ETL\nExtract · transform · load into DWH"]
     F["📋 6 · SSRS Reports\nScheduled · paginated · export-ready"]
     G["📊 7a · Power BI Dashboards\nInteractive visuals · KPIs · drill-through"]
