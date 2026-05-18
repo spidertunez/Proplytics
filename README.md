@@ -10,10 +10,19 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white"/>
-  <img src="https://img.shields.io/badge/SSIS-0078D4?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/SSRS-525252?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/SSIS-0078D4?style=for-the-badge&logo=microsoft&logoColor=white"/>
+  <img src="https://img.shields.io/badge/SSRS-525252?style=for-the-badge&logo=microsoft&logoColor=white"/>
   <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Google_Apps_Script-4285F4?style=for-the-badge&logo=google&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/draw.io-F08705?style=for-the-badge&logo=diagramsdotnet&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
 </p>
+
 
 ---
 
@@ -95,43 +104,75 @@ flowchart TD
 ## 📊 Business Intelligence
 
 - KPI monitoring
-- Forecasting support
 - Executive reporting
 - Data-driven decision making
 
 ---
 
-# 🛠️ Technology Stack
+## Technology stack
+ 
+<p align="center">
+  <img src="https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white"/>
+  <img src="https://img.shields.io/badge/SSIS-0078D4?style=for-the-badge&logo=microsoft&logoColor=white"/>
+  <img src="https://img.shields.io/badge/SSRS-525252?style=for-the-badge&logo=microsoft&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Google_Apps_Script-4285F4?style=for-the-badge&logo=google&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/draw.io-F08705?style=for-the-badge&logo=diagramsdotnet&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+</p>
 
-| Technology | Purpose |
-|------------|----------|
-| SQL Server | Database & Data Warehouse |
-| SSIS | ETL & Data Integration |
-| SSRS | Reporting Services |
-| Power BI | Interactive Dashboards & Visualization |
+| Technology | Category | Purpose |
+|------------|----------|---------|
+| SQL Server | Database | Relational database & data warehouse |
+| SSIS | ETL | Data pipelines & integration |
+| SSRS | Reporting | Paginated operational reports |
+| Power BI | Visualization | Interactive dashboards & KPIs |
+| Google Apps Script | Backend | Web application logic & automation |
+| Supabase | Backend | Authentication & real-time database |
+| JavaScript / HTML / CSS | Frontend | Website interface & styling |
+| Python | Scripting | Data processing & automation scripts |
+| draw.io | Design | ERD & architecture diagrams |
+| GitHub | DevOps | Version control & project hosting |
+ 
 
+
+ 
 ---
+ 
 
-# 📂 Project Structure
-
-```bash
+## Project structure
+ 
+```
 Proplytics/
 │
-├── Mapping/
-├── ERD/
-├── DataWarehouse/
+├── Database/            # Tables, stored procedures, indexes
+├── DataWarehouse/       # Galaxy schema, fact & dimension tables
+│   └── images/
+├── ERD/                 # Entity relationship diagram
+├── Mapping/             # Mapping diagram
+├── Normalization/       # Normalization diagram
+|
+├── SSIS/                # ETL packages (.dtsx)
+├── SSRS/                # Report files (.rdl)
+├── Dashboards/          # Power BI files (.pbix)
+│   └── images/
 │
-├── SSIS/
-├── SSRS/
-├── Dashboards/
+├── Website/             # Frontend interface
+│   └── images/
+├── AI-Automation/       # Automation scripts and flows
+│   └── images/
 │
 ├── docs/
 │   └── images/
 │
 └── README.md
 ```
-
----
+ 
 ---
 
 # 🗂️ ERD (Entity Relationship Diagram)
@@ -246,17 +287,29 @@ Automation features designed to streamline user management and workflow processe
 
 ---
 
-# 🌐 Website / Application Interface
-
-Custom-built website integrated with Power BI dashboards and authentication system.
-
-## 💻 Application Features
-
-- Login System
-- Dashboard Navigation
-- Embedded Power BI Reports
-- Admin & User Access
-- Responsive Interface
+## Website / Application interface
+ 
+Custom-built web application integrated with Power BI dashboards, role-based authentication, and a real-time Supabase backend.
+ 
+**Features:**
+ 
+| Feature | 
+|---------|
+| 🔐 Login system | 
+| 📊 Embedded Power BI |
+| 🧭 Dashboard navigation |
+| 📱 Responsive interface |
+ 
+**Technologies used:**
+ 
+![Google Apps Script](https://img.shields.io/badge/Google_Apps_Script-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
+ 
+<p align="center">
+  <img src="Website/images/dashboard-page.png" width="1000"/>
+</p>
+---
 
 <p align="center">
   <img src="Website/images/dashboard-page.png" width="1000"/>
