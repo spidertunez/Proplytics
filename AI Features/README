@@ -1,0 +1,114 @@
+# Proplytics DWH — Automated Workflows
+
+Real estate data warehouse automation using **SQL Server** + **Make.com** + **Gmail**.
+
+---
+
+## Overview
+
+Two automated workflows that eliminate manual work in the sales process:
+
+| Workflow | Trigger | Action |
+|----------|---------|--------|
+| Workflow 1 — Customer Assignment | New customer added to `Dim_Customer` | Auto-assigns the agent with fewest customers + sends email notification |
+| Workflow 2 — Deal Closure Notification | `DealStatus` updated to `Completed` in `Fact_Sales` | Sends deal summary email to manager |
+
+---
+
+## Architecture
+
+```
+SQL Server (localhost)
+    │
+    ├── Trigger fires on INSERT / UPDATE
+    │
+    ├── Stored Procedure selects data & builds JSON
+    │
+    └── Ole Automation → HTTP POST → Make.com Webhook
+                                          │
+                                          └── Gmail → Agent / Manager
+```
+
+---
+
+## Database
+
+**Database:** `ProplyticsDWH`
+
+Key tables:
+- `Dim_Customer` — Customer dimension (SCD Type 2)
+- `Dim_Agent` — Agent dimension (SCD Type 2)
+- `Fact_Sales` — Sales transactions
+
+---
+
+## Workflow 1 — Customer Assignment
+
+### What it does
+When a new customer is inserted into `Dim_Customer`, the system automatically:
+1. Finds the agent with the fewest assigned customers
+2. Updates `AssignedAgentKey` in `Dim_Customer`
+3. Sends an email to the assigned agent with the customer's details
+
+### Files
+| File | Description |
+|------|-------------|
+| `01_enable_ole_automation.sql` | Enable Ole Automation Procedures in SQL Server |
+| `02_add_assigned_agent_column.sql` | Add `AssignedAgentKey` column to `Dim_Customer` |
+| `03_sp_AssignAgentAndNotify.sql` | Stored Procedure — assigns agent & sends webhook |
+| `04_trg_CustomerInsert.sql` | Trigger — fires on every INSERT into `Dim_Customer` |
+| `05_test_insert.sql` | Test INSERT to verify the workflow |
+
+### Make.com Setup
+- **Module 1:** Custom Webhook (name: `Customer Assignment`)
+- **Module 2:** Gmail → Send an Email to `AgentEmail`
+
+---
+
+## Workflow 2 — Deal Closure Notification
+
+### What it does
+When `DealStatus` changes to `Completed` in `Fact_Sales`, the system automatically:
+1. Fetches customer name, agent name, total amount, commission
+2. Sends a deal summary email to the manager
+
+### Files
+| File | Description |
+|------|-------------|
+| `01_sp_NotifyDealClosure.sql` | Stored Procedure — fetches deal data & sends webhook |
+| `02_trg_DealClosure.sql` | Trigger — fires on UPDATE when DealStatus → Completed |
+| `03_test_update.sql` | Test UPDATE to verify the workflow |
+
+### Make.com Setup
+- **Module 1:** Custom Webhook (name: `Deal Closure`)
+- **Module 2:** Gmail → Send an Email to Manager
+
+---
+
+## Prerequisites
+
+- SQL Server (any edition) with Ole Automation enabled
+- Make.com account (Free or paid)
+- Gmail account connected to Make.com via OAuth
+
+---
+
+## Setup Order
+
+```
+1. Run 01_enable_ole_automation.sql
+2. Run 02_add_assigned_agent_column.sql   (Workflow 1 only)
+3. Create Make.com Webhooks and copy URLs
+4. Run Stored Procedure scripts (update Webhook URLs inside)
+5. Run Trigger scripts
+6. Test with provided test scripts
+```
+
+---
+
+## Tech Stack
+
+- **Database:** Microsoft SQL Server
+- **Automation:** Make.com (formerly Integromat)
+- **Email:** Gmail via Make.com OAuth
+- **HTTP:** Ole Automation (MSXML2.ServerXMLHTTP)
