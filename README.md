@@ -307,14 +307,22 @@ Custom-built web application integrated with Power BI dashboards, role-based aut
 ![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
  
 <p align="center">
-  <img src="Website/images/dashboard-page.png" width="1000"/>
+  <img src="Website/1.png" width="800"/>
 </p>
 ---
 
 <p align="center">
-  <img src="Website/images/dashboard-page.png" width="1000"/>
+  <img src="Website/2.png" width="800"/>
 </p>
-
+---
+<p align="center">
+  <img src="Website/3.png" width="800"/>
+</p>
+---
+<p align="center">
+  <img src="Website/4.png" width="800"/>
+</p>
+---
 ---
 
 # 📊 Dashboard & Reporting Capabilities
