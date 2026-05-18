@@ -1,0 +1,140 @@
+-- ============================================================
+-- Proplytics DWH | Workflow 2 - Deal Closure Notification
+-- Step 1: Stored Procedure - sp_NotifyDealClosure
+-- ============================================================
+-- This SP does 2 things:
+--   1. Fetches deal details (customer, agent, amounts) via JOIN
+--   2. Sends data as JSON to Make.com webhook → Manager email
+-- ============================================================
+-- IMPORTANT: Replace @WebhookURL value with your Make.com URL
+-- ============================================================
+
+CREATE PROCEDURE sp_NotifyDealClosure
+    @DealID     INT,
+    @WebhookURL VARCHAR(500)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- ── 1. Fetch deal, customer, and agent details ────────────
+    DECLARE @CustomerName    VARCHAR(255);
+    DECLARE @AgentName       VARCHAR(255);
+    DECLARE @TotalAmount     DECIMAL(18,2);
+    DECLARE @CommissionAmount NUMERIC(18,2);
+
+    SELECT
+        @CustomerName     = c.FullName,
+        @AgentName        = a.FullName,
+        @TotalAmount      = fs.TotalAmount,
+        @CommissionAmount = fs.CommissionAmount
+    FROM Fact_Sales fs
+    JOIN Dim_Customer c ON fs.CustomerKey = c.CustomerKey AND c.IsCurrent = 1
+    JOIN Dim_Agent    a ON fs.AgentKey    = a.AgentKey    AND a.IsCurrent = 1
+    WHERE fs.DealID     = @DealID
+      AND fs.DealStatus = 'Completed';
+
+    -- ── 2. Build JSON payload ─────────────────────────────────
+    DECLARE @JSON NVARCHAR(MAX);
+    SET @JSON = N'{' +
+        N'"DealID":'           + CAST(@DealID AS NVARCHAR)           + N',' +
+        N'"CustomerName":"'    + ISNULL(@CustomerName, '')           + N'",' +
+        N'"AgentName":"'       + ISNULL(@AgentName, '')              + N'",' +
+        N'"TotalAmount":'      + CAST(@TotalAmount AS NVARCHAR)      + N',' +
+        N'"CommissionAmount":' + CAST(@CommissionAmount AS NVARCHAR) +
+        N'}';
+
+    -- ── 3. Send HTTP POST to Make.com webhook ─────────────────
+    DECLARE @obj      INT;
+    DECLARE @response VARCHAR(8000);
+
+    EXEC sp_OACreate      'MSXML2.ServerXMLHTTP', @obj OUT;
+    EXEC sp_OAMethod      @obj, 'open', NULL, 'POST', @WebhookURL, false;
+    EXEC sp_OAMethod      @obj, 'setRequestHeader', NULL, 'Content-Type', 'application/json';
+    EXEC sp_OAMethod      @obj, 'send', NULL, @JSON;
+    EXEC sp_OAGetProperty @obj, 'responseText', @response OUT;
+    EXEC sp_OADestroy     @obj;
+
+    PRINT @JSON;
+    PRINT @response;
+END;
+-- ============================================================
+-- Proplytics DWH | Workflow 2 - Deal Closure Notification
+-- Step 2: Trigger - trg_DealClosure
+-- ============================================================
+-- Fires automatically after every UPDATE on Fact_Sales.
+-- Compares 'inserted' (new values) vs 'deleted' (old values)
+-- to detect when DealStatus changes TO 'Completed'.
+-- Only fires on actual status change, not on repeated updates.
+-- ============================================================
+-- IMPORTANT: Replace @WebhookURL value with your Make.com URL
+-- ============================================================
+
+CREATE TRIGGER trg_DealClosure
+ON Fact_Sales
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @WebhookURL VARCHAR(500) = 'https://hook.us2.make.com/wxvf9rpebpo5k83ucs2jjebceq98ghxs';
+    -- ↑ Replace with your actual Make.com Webhook URL
+
+    -- Only proceed if DealStatus changed TO 'Completed'
+    -- 'inserted' = new values after UPDATE
+    -- 'deleted'  = old values before UPDATE
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN deleted d ON i.SalesFactKey = d.SalesFactKey
+        WHERE i.DealStatus = 'Completed'
+          AND d.DealStatus != 'Completed'
+    )
+    BEGIN
+        DECLARE @DealID INT;
+
+        SELECT @DealID = DealID
+        FROM inserted
+        WHERE DealStatus = 'Completed';
+
+        EXEC sp_NotifyDealClosure
+            @DealID     = @DealID,
+            @WebhookURL = @WebhookURL;
+    END;
+END;
+-- ============================================================
+-- Proplytics DWH | Workflow 2 - Deal Closure Notification
+-- Step 3: Test UPDATE
+-- ============================================================
+-- Run this to test the workflow end-to-end.
+-- After running, check:
+--   1. DealStatus updated to 'Completed' in Fact_Sales
+--   2. Manager receives email with deal details
+-- ============================================================
+
+-- ── Find an Active deal to test with ─────────────────────────
+SELECT TOP 5
+    fs.DealID,
+    fs.DealStatus,
+    c.FullName  AS CustomerName,
+    a.FullName  AS AgentName,
+    fs.TotalAmount,
+    fs.CommissionAmount
+FROM Fact_Sales fs
+JOIN Dim_Customer c ON fs.CustomerKey = c.CustomerKey AND c.IsCurrent = 1
+JOIN Dim_Agent    a ON fs.AgentKey    = a.AgentKey    AND a.IsCurrent = 1
+WHERE fs.DealStatus = 'Active'
+ORDER BY fs.TotalAmount DESC;
+
+-- ── Test UPDATE (replace DealID with value from query above) ──
+-- UPDATE Fact_Sales
+-- SET DealStatus = 'Completed'
+-- WHERE DealID = <DealID>;
+
+-- ── Verify ────────────────────────────────────────────────────
+-- SELECT DealID, DealStatus FROM Fact_Sales WHERE DealID = <DealID>;
+
+-- ── Rollback for repeated testing ────────────────────────────
+-- Step 1: revert to Active
+-- UPDATE Fact_Sales SET DealStatus = 'Active' WHERE DealID = <DealID>;
+-- Step 2: set to Completed again to re-trigger
+-- UPDATE Fact_Sales SET DealStatus = 'Completed' WHERE DealID = <DealID>;
