@@ -269,26 +269,6 @@ Interactive dashboards designed for business intelligence and executive decision
 </p>
 
 ---
-
-# 🤖 AI Automation
-
-Automation features designed to streamline operational workflows, reduce manual effort, and enhance real-time communication across the Proplytics platform.
-
-<p align="center">
-  <img src="docs/images/ai-automation.gif" width="250"/>
-</p>
-
----
-# 🤖 AI Automation
-
-Automation features designed to streamline operational workflows, reduce manual effort, and enhance real-time communication across the Proplytics platform.
-
-<p align="center">
-  <img src="docs/images/ai-automation.gif" width="250"/>
-</p>
-
----
-
 # ⚡ AI-Powered Automation Features
 
 ## 👤 Smart Customer Assignment
