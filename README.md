@@ -272,59 +272,148 @@ Interactive dashboards designed for business intelligence and executive decision
 
 # 🤖 AI Automation
 
-Automation features designed to streamline user management and workflow processes.
+Automation features designed to streamline operational workflows, reduce manual effort, and enhance real-time communication across the Proplytics platform.
 
-## ⚡ Automation Features
+<p align="center">
+  <img src="docs/images/ai-automation.gif" width="250"/>
+</p>
 
-- Automatic User Assignment
-- Workflow Automation
-- Smart System Integration
-- Process Optimization
+---
+# 🤖 AI Automation
+
+Automation features designed to streamline operational workflows, reduce manual effort, and enhance real-time communication across the Proplytics platform.
+
+<p align="center">
+  <img src="docs/images/ai-automation.gif" width="250"/>
+</p>
+
+---
+
+# ⚡ AI-Powered Automation Features
+
+## 👤 Smart Customer Assignment
+
+Automatically assigns newly registered customers to the most suitable real estate agent based on predefined business rules such as:
+
+- 📍 Geographic Location
+- ⚖️ Agent Workload Balance
+- 🟢 Agent Availability
+
+Once assignment is completed, the assigned agent instantly receives an automated email containing:
+
+- Customer Information
+- Contact Details
+- Property Interest
+- Assignment Details
+
+---
+
+### 🔄 Workflow Architecture
+
+```mermaid
+flowchart LR
+
+A["📝 New Customer"]
+B["⚙️ Make.com Workflow"]
+C["🧠 Assignment Logic"]
+D["👨‍💼 Assign Best Agent"]
+E["🛢️ Update SQL Server"]
+F["📧 Send Email Notification"]
+
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+
+style A fill:#EEEDFE,stroke:#534AB7,color:#3C3489
+style B fill:#E6F1FB,stroke:#185FA5,color:#0C447C
+style C fill:#FAECE7,stroke:#993C1D,color:#712B13
+style D fill:#E1F5EE,stroke:#0F6E56,color:#085041
+style E fill:#FAEEDA,stroke:#854F0B,color:#633806
+style F fill:#FBEAF0,stroke:#993556,color:#72243E
+```
+
+---
+
+### ✅ Business Impact
+
+| Feature | Benefit |
+|---|---|
+| ⚡ Faster Response Time | Immediate customer engagement |
+| ⚖️ Smart Distribution | Balanced workload among agents |
+| 🔄 Automation | Reduced manual operations |
+| 📈 Efficiency | Improved operational performance |
+
+---
+
+## 🤝 Deal Closure Notification
+
+Automatically detects completed property deals and instantly notifies management through real-time email alerts.
+
+This workflow ensures immediate transaction visibility without relying on manual reporting processes.
+
+---
+
+### 🔄 Workflow Architecture
+
+```mermaid
+flowchart LR
+
+A["🏠 Deal Status Updated"]
+B["🛢️ SQL Server Trigger"]
+C["⚙️ Make.com Automation"]
+D["📊 Retrieve Transaction Details"]
+E["📧 Notify Management"]
+
+A --> B
+B --> C
+C --> D
+D --> E
+
+style A fill:#EEEDFE,stroke:#534AB7,color:#3C3489
+style B fill:#E6F1FB,stroke:#185FA5,color:#0C447C
+style C fill:#FAECE7,stroke:#993C1D,color:#712B13
+style D fill:#E1F5EE,stroke:#0F6E56,color:#085041
+style E fill:#FBEAF0,stroke:#993556,color:#72243E
+```
+
+---
+
+### ✅ Business Impact
+
+| Feature | Benefit |
+|---|---|
+| 👁️ Visibility | Real-time transaction monitoring |
+| ⚡ Communication | Instant management notifications |
+| 📊 Transparency | Improved operational awareness |
+| 🔄 Reporting | Reduced manual reporting dependency |
+
+---
+
+# 🛠️ Technologies Used
+
+<p align="center">
+  <img src="https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Make.com-6D5DFB?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Gmail_API-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>
+  <img src="https://img.shields.io/badge/OAuth-4285F4?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/HTTP_Requests-FF6B00?style=for-the-badge"/>
+</p>
+
+| Technology | Purpose |
+|---|---|
+| SQL Server | Database operations & workflow triggers |
+| Make.com | Workflow automation |
+| Gmail API | Automated email notifications |
+| OAuth Authentication | Secure email integration |
+| MSXML2.ServerXMLHTTP | HTTP communication |
+
+---
 
 <p align="center">
   <img src="AI-Automation/images/automation-flow.png" width="1000"/>
 </p>
-
----
-
-## Website / Application interface
- 
-Custom-built web application integrated with Power BI dashboards, role-based authentication, and a real-time Supabase backend.
- 
-**Features:**
- 
-| Feature | 
-|---------|
-| 🔐 Login system | 
-| 📊 Embedded Power BI |
-| 🧭 Dashboard navigation |
-| 📱 Responsive interface |
- 
-**Technologies used:**
- 
-![Google Apps Script](https://img.shields.io/badge/Google_Apps_Script-4285F4?style=for-the-badge&logo=google&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
- 
-<p align="center">
-  <img src="Website/1.png" width="800"/>
-</p>
----
-
-<p align="center">
-  <img src="Website/2.png" width="800"/>
-</p>
----
-<p align="center">
-  <img src="Website/3.png" width="800"/>
-</p>
----
-<p align="center">
-  <img src="Website/4.png" width="800"/>
-</p>
----
----
-
 # 📊 Dashboard & Reporting Capabilities
 
 ✔ Executive KPI Dashboards  
