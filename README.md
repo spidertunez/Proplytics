@@ -275,8 +275,8 @@ Interactive dashboards designed for business intelligence, analytics, and execut
   <img src="Dashboards/Executive Overview.png" width="700"/>
   <img src="Dashboards/Agent Performance.png" width="700"/>
   <img src="Dashboards/Customer Overview.png" width="700"/>
-  <img src="Dashboards/Revenue & Income.png" width="700"/>
-  <img src="Dashboards/Property Price Trends.png" width="700"/>
+  <img src="Dashboards/Revenue&Income .png" width="700"/>
+  <img src="Dashboards/Property_Price_Trends.png" width="700"/>
 </p>
 
 ---
