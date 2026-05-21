@@ -225,9 +225,16 @@ End-to-end ETL pipelines built using SQL Server Integration Services (SSIS).
 - Loading Into Data Warehouse
 - Automated Processing
 
-<p align="center">
-  <img src="SSIS/Dim_Agent.png" width="1000"/>
-</p>
+<table align="center">
+  <tr>
+    <td>
+      <img src="SSIS/Dim_Agent.png" width="400"/>
+    </td>
+    <td>
+      <img src="SSIS/Fact_PropertyListings.png" width="500"/>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -244,9 +251,9 @@ Paginated, export-ready operational reports built using SQL Server Reporting Ser
 - Agent Performance Reports
 
 <p align="center">
-  <img src="SSRS/Report Images/AgentComission.png" width="1300"/>
+  <img src="SSRS/Report Images/AgentComission.png" width="500"/>
+  <img src="SSRS/Report Images/PropertyInventory.png" width="800"/>
 </p>
-
 ---
 
 # 📊 Power BI Dashboards
@@ -263,6 +270,16 @@ Interactive dashboards designed for business intelligence and executive decision
 ✔ Market Trend Analysis  
 ✔ KPI Monitoring  
 ✔ Drill-through Analysis  
+
+# 📊 Dashboard & Reporting Capabilities
+
+✔ Executive KPI Dashboards  
+✔ Sales & Revenue Analysis  
+✔ Property Performance Tracking  
+✔ Customer Insights  
+✔ Agent Productivity Monitoring  
+✔ Market Trend Visualization  
+✔ Forecasting & Strategic Reporting  
 
 <p align="center">
   <img src="Dashboards/images/executive-dashboard.png" width="1000"/>
@@ -315,7 +332,10 @@ style F fill:#FBEAF0,stroke:#993556,color:#72243E
 ```
 
 ---
-
+<p align="center">
+  <img src="AI Features/Workflow1-Customer-Assignment/Workflow1.png" width="550"/>
+</p>
+--
 ### ✅ Business Impact
 
 | Feature | Benefit |
@@ -357,10 +377,16 @@ style C fill:#FAECE7,stroke:#993C1D,color:#712B13
 style D fill:#E1F5EE,stroke:#0F6E56,color:#085041
 style E fill:#FBEAF0,stroke:#993556,color:#72243E
 ```
+--
+
+<p align="center">
+  <img src="AI Features/Workflow2-Deal-Closure/WorkFlow2.png" width="550"/>
+</p>
+
 
 ---
 
-### ✅ Business Impact
+## ✅ Business Impact
 
 | Feature | Benefit |
 |---|---|
@@ -388,21 +414,6 @@ style E fill:#FBEAF0,stroke:#993556,color:#72243E
 | Gmail API | Automated email notifications |
 | OAuth Authentication | Secure email integration |
 | MSXML2.ServerXMLHTTP | HTTP communication |
-
----
-
-<p align="center">
-  <img src="AI-Automation/images/automation-flow.png" width="1000"/>
-</p>
-# 📊 Dashboard & Reporting Capabilities
-
-✔ Executive KPI Dashboards  
-✔ Sales & Revenue Analysis  
-✔ Property Performance Tracking  
-✔ Customer Insights  
-✔ Agent Productivity Monitoring  
-✔ Market Trend Visualization  
-✔ Forecasting & Strategic Reporting  
 
 ---
 
