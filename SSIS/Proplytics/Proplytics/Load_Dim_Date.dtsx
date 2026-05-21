@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/9/2026 1:35:33 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SOHILA"
+  DTS:CreatorName="SOHILA\LENOVO"
+  DTS:DTSID="{832CDC2D-2EAC-41D0-BA08-7B80DC82CE60}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionGUID="{38FED553-5045-43DB-B7D7-F2CB08FD5246}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>
