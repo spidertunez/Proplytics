@@ -258,31 +258,25 @@ Paginated, export-ready operational reports built using SQL Server Reporting Ser
 
 # 📊 Power BI Dashboards
 
-Interactive dashboards designed for business intelligence and executive decision-making.
+Interactive dashboards designed for business intelligence, analytics, and executive decision-making.
 
-## 📈 Dashboard Capabilities
-
-✔ Executive Overview  
-✔ Revenue Analytics  
-✔ Sales Performance Tracking  
-✔ Customer Insights  
-✔ Property Analytics  
-✔ Market Trend Analysis  
-✔ KPI Monitoring  
-✔ Drill-through Analysis  
-
-# 📊 Dashboard & Reporting Capabilities
+## 📈 Dashboard & Reporting Capabilities
 
 ✔ Executive KPI Dashboards  
-✔ Sales & Revenue Analysis  
+✔ Revenue & Sales Analysis  
 ✔ Property Performance Tracking  
-✔ Customer Insights  
+✔ Customer Insights & Segmentation  
 ✔ Agent Productivity Monitoring  
 ✔ Market Trend Visualization  
 ✔ Forecasting & Strategic Reporting  
+✔ KPI Monitoring & Drill-through Analysis  
 
 <p align="center">
-  <img src="Dashboards/images/executive-dashboard.png" width="1000"/>
+  <img src="Dashboards/Executive Overview.png" width="700"/>
+  <img src="Dashboards/Agent Performance.png" width="700"/>
+  <img src="Dashboards/Customer Overview.png" width="700"/>
+  <img src="Dashboards/Revenue & Income.png" width="700"/>
+  <img src="Dashboards/Property Price Trends.png" width="700"/>
 </p>
 
 ---
