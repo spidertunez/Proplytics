@@ -201,6 +201,10 @@ Business rules, transformation logic, and source-to-destination mapping process.
 
 Galaxy schema implementation using fact and dimension tables.
 
+<p align="center">
+  <img src="DataWarehouse/PowerBI_GalaxySchema.png" width="1000"/>
+</p>
+
 ## 📌 Included Components
 
 - Fact Tables
