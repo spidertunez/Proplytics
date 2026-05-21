@@ -210,7 +210,7 @@ Galaxy schema implementation using fact and dimension tables.
 - Fact Tables
 - Dimension Tables
 - Historical Tracking
-- Star / Galaxy Schema
+- Galaxy Schema
 - Analytical Data Modeling
 
 ---
