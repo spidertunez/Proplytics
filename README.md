@@ -1,5 +1,7 @@
 # 🚀 Proplytics
-
+<p align="center">
+  <img src="docs/Proplytics.png" width="470"/>
+  </p>
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=1000&size=28&pause=1000&color=4EA1FF&center=true&vCenter=true&width=900&lines=Welcome+to+Proplytics;Where+Real+Estate+Data+Becomes+Powerful+Insights;Analytics+%7C+Operations+%7C+Decision+Support" />
 </p>
