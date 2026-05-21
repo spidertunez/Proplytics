@@ -280,34 +280,173 @@ Interactive dashboards designed for business intelligence, analytics, and execut
 ---
 # ⚡ AI-Powered Automation Features
 
-## 👤 Smart Customer Assignment
+Two automated workflows were built and deployed using **SQL Server**, **Make.com**, and **Gmail** to eliminate manual operations in the customer assignment and deal reporting processes.
 
-Automatically assigns newly registered customers to the most suitable real estate agent based on predefined business rules such as:
-
-- 📍 Geographic Location
-- ⚖️ Agent Workload Balance
-- 🟢 Agent Availability
-
-Once assignment is completed, the assigned agent instantly receives an automated email containing:
-
-- Customer Information
-- Contact Details
-- Property Interest
-- Assignment Details
+> **Why Webhook?**
+> SQL Server runs on **localhost** — not accessible from the internet. Make.com is a cloud platform.
+> The solution uses a **Webhook**: Make.com provides a public HTTPS URL, and SQL Server **pushes data TO it** the moment a database event occurs. Make.com receives the data and triggers the Gmail notification automatically.
+>
+> ```
+> Without Webhook:  Make → (fails) → SQL Server on localhost
+> With Webhook:     Make ← (POST) ← SQL Server pushes data
+> ```
 
 ---
 
-### 🔄 Workflow Architecture
+## 👤 Workflow 1 — Smart Customer Assignment
+
+### Business Problem
+When a new customer registered, a manager had to **manually** check all agents, review their workload, and assign the most suitable one — slow, error-prone, and causing uneven workload distribution.
+
+### Solution
+The moment a new customer is inserted into `Dim_Customer`, the system automatically selects the agent with the fewest assigned customers, saves the assignment to the database, and emails the agent with the customer's full details — **zero manual effort**.
+
+### How It Works — Step by Step
+
+```
+New customer inserted into Dim_Customer
+            ↓
+Trigger fires automatically (AFTER INSERT)
+            ↓
+Stored Procedure runs
+            ↓
+Finds agent with fewest assigned customers
+            ↓
+Updates AssignedAgentKey in Dim_Customer
+            ↓
+Sends JSON to Make.com Webhook
+            ↓
+Make.com sends email to assigned Agent ✅
+```
+
+### Workflow Architecture
 
 ```mermaid
 flowchart LR
 
-A["📝 New Customer"]
-B["⚙️ Make.com Workflow"]
-C["🧠 Assignment Logic"]
-D["👨‍💼 Assign Best Agent"]
-E["🛢️ Update SQL Server"]
-F["📧 Send Email Notification"]
+A["📝 New Customer\nInserted into DB"]
+B["⚡ SQL Trigger\ntrg_CustomerInsert"]
+C["🧠 Stored Procedure\nsp_AssignAgentAndNotify"]
+D["👨‍💼 Best Agent Selected\n(Fewest Customers)"]
+E["🛢️ Update DB\nAssignedAgentKey"]
+F["🔗 HTTP POST\nMake.com Webhook"]
+G["📧 Email Sent\nto Agent"]
+
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+F --> G
+
+style A fill:#EEEDFE,stroke:#534AB7,color:#3C3489
+style B fill:#E6F1FB,stroke:#185FA5,color:#0C447C
+style C fill:#E6F1FB,stroke:#185FA5,color:#0C447C
+style D fill:#FAECE7,stroke:#993C1D,color:#712B13
+style E fill:#E1F5EE,stroke:#0F6E56,color:#085041
+style F fill:#FAEEDA,stroke:#854F0B,color:#633806
+style G fill:#FBEAF0,stroke:#993556,color:#72243E
+```
+
+### Agent Selection Logic
+
+```sql
+-- Selects the agent with the fewest assigned customers
+SELECT TOP 1 da.AgentKey
+FROM Dim_Agent da
+LEFT JOIN Dim_Customer dc ON da.AgentKey = dc.AssignedAgentKey
+WHERE da.IsCurrent = 1
+GROUP BY da.AgentKey
+ORDER BY COUNT(dc.CustomerKey) ASC;
+```
+
+### SQL Components Built
+
+| Component | Name | Purpose |
+|-----------|------|---------|
+| Column | `AssignedAgentKey` | Added to `Dim_Customer` to store assigned agent |
+| Stored Procedure | `sp_AssignAgentAndNotify` | Selects agent, updates DB, sends webhook |
+| Trigger | `trg_CustomerInsert` | `AFTER INSERT` on `Dim_Customer` — fires automatically |
+
+### Make.com Setup
+
+```
+Module 1: Custom Webhook  ──►  Module 2: Gmail
+          │                              │
+          └── Receives JSON              └── To: AgentEmail
+              from SQL Server                Subject: New Customer Assigned: {FullName}
+                                             Body: Customer details (HTML)
+```
+
+### Email Received by Agent
+
+```
+Subject: New Customer Assigned: Nour Ahmed
+
+Dear Amal Hamdy,
+
+A new customer has been assigned to you:
+  Customer Name:  Nour Ahmed
+  Email:          nour.ahmed@gmail.com
+  Phone:          01555555555
+  Budget:         650,000 EGP
+
+Please contact the customer as soon as possible.
+Best regards, Proplytics System
+```
+
+<p align="center">
+  <img src="AI Features/Workflow1-Customer-Assignment/Workflow1.png" width="550"/>
+</p>
+
+### ✅ Business Impact
+
+| Feature | Benefit |
+|---------|---------|
+| ⚡ Instant Assignment | Customer assigned the second they register |
+| ⚖️ Smart Distribution | Always picks the agent with fewest customers |
+| 🔄 Zero Manual Work | No manager intervention needed |
+| 📧 Auto Notification | Agent emailed immediately with full details |
+
+---
+
+## 🤝 Workflow 2 — Deal Closure Notification
+
+### Business Problem
+When a deal was closed, managers had **no automatic visibility**. Agents had to remember to report manually — causing delays, communication gaps, and missed transactions.
+
+### Solution
+The moment `DealStatus` changes to `Completed` in `Fact_Sales`, the system automatically fetches the full deal details and emails the manager instantly — **real-time, no manual reporting**.
+
+### How It Works — Step by Step
+
+```
+DealStatus updated to 'Completed' in Fact_Sales
+            ↓
+Trigger fires automatically (AFTER UPDATE)
+            ↓
+Compares old value vs new value
+(only fires if status CHANGED to Completed)
+            ↓
+Stored Procedure fetches deal details
+(Customer + Agent + Amount + Commission)
+            ↓
+Sends JSON to Make.com Webhook
+            ↓
+Make.com sends email to Manager ✅
+```
+
+### Workflow Architecture
+
+```mermaid
+flowchart LR
+
+A["🏠 DealStatus\n→ Completed"]
+B["⚡ SQL Trigger\ntrg_DealClosure"]
+C["🔍 Change Detected\ninserted vs deleted"]
+D["🧠 Stored Procedure\nsp_NotifyDealClosure"]
+E["🔗 HTTP POST\nMake.com Webhook"]
+F["📧 Email Sent\nto Manager"]
 
 A --> B
 B --> C
@@ -323,69 +462,67 @@ style E fill:#FAEEDA,stroke:#854F0B,color:#633806
 style F fill:#FBEAF0,stroke:#993556,color:#72243E
 ```
 
----
-<p align="center">
-  <img src="AI Features/Workflow1-Customer-Assignment/Workflow1.png" width="550"/>
-</p>
---
-### ✅ Business Impact
+### Trigger Change Detection
 
-| Feature | Benefit |
-|---|---|
-| ⚡ Faster Response Time | Immediate customer engagement |
-| ⚖️ Smart Distribution | Balanced workload among agents |
-| 🔄 Automation | Reduced manual operations |
-| 📈 Efficiency | Improved operational performance |
-
----
-
-## 🤝 Deal Closure Notification
-
-Automatically detects completed property deals and instantly notifies management through real-time email alerts.
-
-This workflow ensures immediate transaction visibility without relying on manual reporting processes.
-
----
-
-### 🔄 Workflow Architecture
-
-```mermaid
-flowchart LR
-
-A["🏠 Deal Status Updated"]
-B["🛢️ SQL Server Trigger"]
-C["⚙️ Make.com Automation"]
-D["📊 Retrieve Transaction Details"]
-E["📧 Notify Management"]
-
-A --> B
-B --> C
-C --> D
-D --> E
-
-style A fill:#EEEDFE,stroke:#534AB7,color:#3C3489
-style B fill:#E6F1FB,stroke:#185FA5,color:#0C447C
-style C fill:#FAECE7,stroke:#993C1D,color:#712B13
-style D fill:#E1F5EE,stroke:#0F6E56,color:#085041
-style E fill:#FBEAF0,stroke:#993556,color:#72243E
+```sql
+-- 'inserted' = new values after UPDATE
+-- 'deleted'  = old values before UPDATE
+-- Only fires when DealStatus actually CHANGES to Completed
+IF EXISTS (
+    SELECT 1 FROM inserted i
+    JOIN deleted d ON i.SalesFactKey = d.SalesFactKey
+    WHERE i.DealStatus = 'Completed'
+      AND d.DealStatus != 'Completed'
+)
 ```
---
+
+### SQL Components Built
+
+| Component | Name | Purpose |
+|-----------|------|---------|
+| Stored Procedure | `sp_NotifyDealClosure` | JOINs 3 tables, builds JSON, sends webhook |
+| Trigger | `trg_DealClosure` | `AFTER UPDATE` on `Fact_Sales` — detects status change |
+
+### Make.com Setup
+
+```
+Module 1: Custom Webhook  ──►  Module 2: Gmail
+          │                              │
+          └── Receives JSON              └── To: Manager Email
+              from SQL Server                Subject: Deal Closed: {CustomerName} - {TotalAmount} EGP
+                                             Body: Full deal summary (HTML)
+```
+
+### Email Received by Manager
+
+```
+Subject: Deal Closed: Hassan Hafez - 2,500,000 EGP
+
+Dear Manager,
+
+A deal has been successfully closed:
+  Deal ID:            14
+  Customer Name:      Hassan Hafez
+  Agent Name:         Osama Nasser
+  Total Amount:       2,500,000 EGP
+  Commission Amount:  87,500 EGP
+
+Best regards, Proplytics System
+```
 
 <p align="center">
   <img src="AI Features/Workflow2-Deal-Closure/WorkFlow2.png" width="550"/>
 </p>
 
-
----
-
-## ✅ Business Impact
+### ✅ Business Impact
 
 | Feature | Benefit |
-|---|---|
-| 👁️ Visibility | Real-time transaction monitoring |
-| ⚡ Communication | Instant management notifications |
-| 📊 Transparency | Improved operational awareness |
-| 🔄 Reporting | Reduced manual reporting dependency |
+|---------|---------|
+| 👁️ Real-Time Visibility | Manager notified the second a deal closes |
+| ⚡ Instant Communication | No waiting for manual reports |
+| 📊 Full Transparency | Complete deal summary in every email |
+| 🔄 Zero Manual Reporting | Fully automated end-to-end |
+
 
 ---
 
