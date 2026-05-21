@@ -207,10 +207,6 @@ Galaxy schema implementation using fact and dimension tables.
 - Star / Galaxy Schema
 - Analytical Data Modeling
 
-<p align="center">
-  <img src="DataWarehouse/images/galaxy-schema.png" width="1000"/>
-</p>
-
 ---
 
 # 🔄 SSIS ETL Process
@@ -438,7 +434,8 @@ Custom-built web application integrated with Power BI dashboards, role-based aut
 
 </p>
 ---
-# 🎯 Project Goals
+
+## 🎯 Project Goals
 
 - Centralize real estate operational data
 - Improve reporting efficiency
