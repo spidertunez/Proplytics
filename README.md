@@ -276,7 +276,7 @@ Interactive dashboards designed for business intelligence, analytics, and execut
   <img src="Dashboards/Agent Performance.png" width="700"/>
   <img src="Dashboards/Customer Overview.png" width="700"/>
   <img src="Dashboards/Revenue&Income .png" width="700"/>
-  <img src="Dashboards/Property_Price_Trends.png" width="700"/>
+  <img src="Dashboards/PropertyـPriceـTrends .png" width="700"/>
 </p>
 
 ---
@@ -411,6 +411,33 @@ style E fill:#FBEAF0,stroke:#993556,color:#72243E
 
 ---
 
+## Website / Application interface
+ 
+Custom-built web application integrated with Power BI dashboards, role-based authentication, and a real-time Supabase backend.
+ 
+**Features:**
+ 
+| Feature |
+|---------|
+| 🔐 Login system | 
+| 📊 Embedded Power BI | 
+| 🧭 Dashboard navigation | 
+| 📱 Responsive interface |
+ 
+**Technologies used:**
+ 
+![Google Apps Script](https://img.shields.io/badge/Google_Apps_Script-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
+ 
+<p align="center">
+  <img src="Website/1.png" width="700"/>
+  <img src="Website/2.png" width="700"/>
+  <img src="Website/3.png" width="700"/>
+  <img src="Website/4.png" width="700"/>
+
+</p>
+---
 # 🎯 Project Goals
 
 - Centralize real estate operational data
@@ -420,8 +447,6 @@ style E fill:#FBEAF0,stroke:#993556,color:#72243E
 - Build scalable BI architecture
 
 ---
-
-
 ---
 
 # 👨‍💻 Team Vision
