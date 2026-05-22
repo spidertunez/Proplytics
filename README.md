@@ -572,7 +572,6 @@ Custom-built web application integrated with Power BI dashboards, role-based aut
 - Build scalable BI architecture
 
 ---
----
 
 # 👨‍💻 Team Vision
 
