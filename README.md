@@ -241,6 +241,7 @@ Paginated, export-ready operational reports built using SQL Server Reporting Ser
   <img src="SSRS/Report Images/AgentComission.png" width="500"/>
   <img src="SSRS/Report Images/PropertyInventory.png" width="800"/>
 </p>
+
 ---
 
 # 📊 Power BI Dashboards
